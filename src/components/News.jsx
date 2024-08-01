@@ -12,7 +12,7 @@ const News = (props) => {
     // props.setProgress(30);
     let parsedData = await data.json()
     // props.setProgress(70);
-    setArticles(data.articles.filter(Boolean))
+    setArticles(parsedData.articles.filter(Boolean))
     props.setProgress(100);
   }
   useEffect(() => {
