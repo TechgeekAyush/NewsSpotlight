@@ -21,7 +21,7 @@ const News = (props) => {
   return (
     <>
       <p className='text-center text-2xl font-extrabold p-3'>NewsSpotlight - Top {(props.category).charAt(0).toUpperCase() + (props.category).slice(1)} Headlines</p>
-      <div className="flex flex-wrap justify-center gap-10">
+      <div className="flex flex-wrap justify-center mx-auto gap-10">
         {articles.map((element) => {
           return <NewsItem key={element.url} title={element.title} description={element.description} image={element.image} url={element.url} sourcename={element.source.name} publishedAt={element.publishedAt} />
         })}
