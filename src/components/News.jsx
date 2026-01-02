@@ -7,12 +7,20 @@ const News = (props) => {
   const [articles, setArticles] = useState([]);
   const updateNews = async () => {
     props.setProgress(10)
-    const url = `https://gnews.io/api/v4/top-headlines?lang=en&country=in&category=${props.category}&apikey=${apiKey}`
-    let data = await fetch(url);
-    // props.setProgress(30);
-    let parsedData = await data.json()
-    // props.setProgress(70);
-    setArticles(parsedData.articles.filter(Boolean))
+    // const url = `https://gnews.io/api/v4/top-headlines?lang=en&country=in&category=${props.category}&apikey=${apiKey}`
+    // let data = await fetch(url);
+    // // props.setProgress(30);
+    // let parsedData = await data.json()
+    // // props.setProgress(70);
+    // setArticles(parsedData.articles.filter(Boolean))
+    const originalUrl = `https://gnews.io/api/v4/top-headlines?lang=en&country=in&category=${props.category}&apikey=${apiKey}`;
+    const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(originalUrl)}`;
+
+    let data = await fetch(proxyUrl);
+    let proxyResponse = await data.json();
+    let parsedData = JSON.parse(proxyResponse.contents); // The actual API response is in 'contents'
+
+    setArticles(parsedData.articles.filter(Boolean));
     props.setProgress(100);
   }
   useEffect(() => {
