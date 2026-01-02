@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 import NewsItem from './NewsItem'
 
 const News = (props) => {
-  const apiKey = import.meta.env.VITE_REACT_NEWS_API_KEY;
   document.title = `${(props.category).charAt(0).toUpperCase() + (props.category).slice(1)} - NewsSpotlight`
   const [articles, setArticles] = useState([]);
   const updateNews = async () => {
     props.setProgress(10)
-    const url = `https://gnews.io/api/v4/top-headlines?lang=en&country=in&category=${props.category}&apikey=${apiKey}`
+    // In News.jsx, inside updateNews function
+    const url = `/api/news?category=${props.category}`;
     let data = await fetch(url);
     // props.setProgress(30);
     let parsedData = await data.json()
